@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notebook | PIM-NEBS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="PIM-NEBS home">
+        <img class="brand-logo" src="assets/brand/idec-logo.png" alt="" />
+        <span>PIM-NEBS</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <details class="nav-project nav-team"><summary>Team</summary><div class="nav-project-panel nav-team-panel"><a href="team.html">Member</a><a href="attribution.html">Attribution</a></div></details>
+        <details class="nav-project">
+          <summary>Project</summary>
+          <div class="nav-project-panel">
+            <a href="project-background.html">Background</a>
+            <a href="project-challenge.html">Challenge</a>
+            <a href="project-methods.html">Methods</a>
+            <a href="project-description.html">Description</a>
+            <a href="project-design.html">Design</a>
+            <a href="project-results.html">Results</a>
+          </div>
+        </details>
+        <details class="nav-project nav-document">
+          <summary class="active">Document</summary>
+          <div class="nav-project-panel nav-document-panel">
+            <a href="notebook.html">Notebook</a>
+            <a href="protocol.html">Protocol</a>
+          </div>
+        </details>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section notebook-reader" aria-labelledby="notebook-title">
+        <div class="notebook-toolbar">
+          <div>
+            <p class="eyebrow">2026 PIM-NEBS</p>
+            <h2 id="notebook-title">Lab notebook viewer</h2>
+          </div>
+          <div class="notebook-controls" aria-label="Notebook page controls">
+            <button class="notebook-btn" type="button" data-action="prev">Previous</button>
+            <label>
+              Page
+              <input id="notebook-page" type="number" min="1" max="64" value="1" />
+              <span>/ 64</span>
+            </label>
+            <button class="notebook-btn" type="button" data-action="next">Next</button>
+          </div>
+        </div>
+
+        <div class="notebook-frame">
+          <iframe
+            id="notebook-pdf"
+            title="PIM-NEBS 2026 notebook PDF"
+            src="assets/notebook/2026-Notebook-formatted-16weeks.pdf#page=1&view=FitH"
+          ></iframe>
+        </div>
+
+        <p class="notebook-fallback">
+          If the notebook viewer does not load, open the PDF directly:
+          <a href="assets/notebook/2026-Notebook-formatted-16weeks.pdf">2026 Notebook PDF</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <section>
+          <h2>About US</h2>
+          <p>Meet the people behind PIM-NEBS.</p>
+        </section>
+        <section>
+          <h2>About Topic</h2>
+          <p>PET hydrolase rational evolution and graph-based enzyme design.</p>
+        </section>
+        <section>
+          <h2>Contact US</h2>
+          <p>Connect with PIM-NEBS.</p>
+        </section>
+      </div>
+    </footer>
+
+    <script>
+      (() => {
+        const totalPages = 64;
+        const pdfPath = "assets/notebook/2026-Notebook-formatted-16weeks.pdf";
+        const frame = document.querySelector("#notebook-pdf");
+        const input = document.querySelector("#notebook-page");
+        const clamp = (value) => Math.min(totalPages, Math.max(1, Number(value) || 1));
+        const showPage = (page) => {
+          const nextPage = clamp(page);
+          input.value = nextPage;
+          frame.src = `${pdfPath}#page=${nextPage}&view=FitH`;
+        };
+
+        document.querySelector('[data-action="prev"]').addEventListener("click", () => showPage(Number(input.value) - 1));
+        document.querySelector('[data-action="next"]').addEventListener("click", () => showPage(Number(input.value) + 1));
+        input.addEventListener("change", () => showPage(input.value));
+      })();
+    </script>
+  </body>
+</html>
