@@ -1794,7 +1794,7 @@ h3 {
   position: relative;
   margin-top: clamp(70px, 10vw, 120px);
   padding: clamp(58px, 7vw, 82px) clamp(24px, 5vw, 86px) clamp(46px, 6vw, 76px);
-  overflow: hidden;
+  overflow: visible;
   background:
     radial-gradient(circle at 35% 100%, rgba(8, 79, 85, 0.24) 0 54px, transparent 56px),
     linear-gradient(180deg, #bfe2f1 0%, #82c2e3 100%);
