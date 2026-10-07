@@ -1827,18 +1827,19 @@ h3 {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.45fr) minmax(0, 0.9fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   align-items: start;
-  gap: clamp(30px, 6vw, 86px);
-  max-width: 1160px;
+  gap: clamp(24px, 4vw, 54px);
+  max-width: 1220px;
   margin: 0 auto;
 }
 
-.footer-content section:nth-child(2) {
+.footer-content section {
   text-align: center;
 }
 
-.footer-content section:nth-child(2) p {
+.footer-content p,
+.footer-project-menu {
   margin-right: auto;
   margin-left: auto;
 }
@@ -1850,14 +1851,78 @@ h3 {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.35rem, 2.2vw, 1.9rem);
   font-weight: 500;
+  line-height: 1.2;
 }
 
 .footer-content p {
-  max-width: 360px;
+  max-width: 270px;
   margin: 0;
   color: #235f67;
   font-size: clamp(0.95rem, 1.4vw, 1.05rem);
   line-height: 1.45;
+}
+
+.footer-project-links p {
+  max-width: 270px;
+}
+
+.footer-project-menu {
+  position: relative;
+  width: min(100%, 270px);
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.footer-project-menu summary {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  color: #153940;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.2;
+  list-style: none;
+  cursor: pointer;
+}
+
+.footer-project-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.footer-project-menu summary:hover {
+  color: #0e6f75;
+}
+
+.footer-project-menu nav {
+  position: absolute;
+  right: 50%;
+  bottom: calc(100% + 12px);
+  z-index: 5;
+  display: grid;
+  gap: 2px;
+  width: 190px;
+  padding: 12px 16px 14px;
+  transform: translateX(50%);
+  background: #ffffff;
+  box-shadow: 0 16px 36px rgba(11, 64, 70, 0.16);
+}
+
+.footer-project-menu:not([open]) nav {
+  display: none;
+}
+
+.footer-project-menu a {
+  color: #18c9f2;
+  font-size: 1.02rem;
+  font-weight: 850;
+  line-height: 1.28;
+  text-align: center;
+  text-decoration: none;
+}
+
+.footer-project-menu a:hover {
+  color: #0a98c0;
 }
 
 @media (max-width: 980px) {
