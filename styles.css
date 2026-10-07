@@ -1279,10 +1279,46 @@ h3 {
   color: rgba(255, 255, 255, 0.84);
 }
 
+.notebook-layout {
+  padding-top: clamp(32px, 5vw, 58px);
+}
+
 .notebook-reader {
   padding-top: clamp(32px, 5vw, 58px);
   background:
     linear-gradient(180deg, #f6fbfb, #ffffff);
+}
+
+.article-page.notebook-reader {
+  padding-top: clamp(30px, 4vw, 48px);
+}
+
+.notebook-week-nav a.active {
+  color: #16b8dd;
+  background: rgba(126, 207, 227, 0.16);
+}
+
+.notebook-week-nav a.active::before {
+  background: #16b8dd;
+  box-shadow: 0 0 0 5px rgba(22, 184, 221, 0.18);
+}
+
+.notebook-week-nav {
+  gap: 8px;
+  width: min(100%, 220px);
+  padding: 18px 16px;
+}
+
+.notebook-week-nav a {
+  padding: 7px 10px 7px 16px;
+  font-size: 0.94rem;
+  line-height: 1.28;
+}
+
+.notebook-week-nav a::before {
+  top: 14px;
+  width: 6px;
+  height: 6px;
 }
 
 .notebook-toolbar {
@@ -1298,8 +1334,8 @@ h3 {
 }
 
 .notebook-controls {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 92px auto 92px;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
@@ -1308,7 +1344,9 @@ h3 {
 .notebook-controls label {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  height: 44px;
   min-height: 44px;
   padding: 0 12px;
   color: #125b66;
@@ -1318,7 +1356,7 @@ h3 {
 }
 
 .notebook-controls input {
-  width: 70px;
+  width: 64px;
   min-height: 30px;
   border: 1px solid rgba(18, 91, 102, 0.2);
   color: #125b66;
@@ -1328,13 +1366,21 @@ h3 {
 
 .notebook-btn,
 .week-jump button {
+  height: 44px;
   min-height: 44px;
-  padding: 0 16px;
+  padding: 0 12px;
   color: #ffffff;
   font-weight: 850;
   border: 0;
   background: #128ea5;
   cursor: pointer;
+}
+
+.notebook-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 92px;
 }
 
 .notebook-btn:hover,
@@ -2060,10 +2106,19 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .notebook-controls,
+  .notebook-controls {
+    width: 100%;
+    grid-template-columns: minmax(74px, 1fr) minmax(150px, 1.35fr) minmax(74px, 1fr);
+  }
+
   .notebook-controls label,
   .notebook-btn {
+    width: auto;
+  }
+
+  .notebook-btn {
     width: 100%;
+    min-width: 74px;
   }
 
   .notebook-controls label {
