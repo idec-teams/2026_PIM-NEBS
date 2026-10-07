@@ -1509,6 +1509,10 @@ h3 {
   object-position: center 42%;
 }
 
+.project-banner-protocol img {
+  object-position: center 50%;
+}
+
 .project-banner::after {
   content: "";
   position: absolute;
@@ -1661,6 +1665,14 @@ h3 {
   color: #125b66;
   font-size: clamp(1.4rem, 2.6vw, 2rem);
   line-height: 1.18;
+}
+
+.article-page h4 {
+  max-width: 780px;
+  margin: 28px 0 12px;
+  color: #174e58;
+  font-size: clamp(1.06rem, 1.8vw, 1.25rem);
+  line-height: 1.3;
 }
 
 .article-section + .article-section,
