@@ -513,6 +513,24 @@ a {
   z-index: 1;
 }
 
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  filter: blur(8px);
+  transition:
+    opacity 780ms ease,
+    transform 780ms ease,
+    filter 780ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
 .eyebrow {
   margin: 0 0 10px;
   color: var(--teal);
@@ -2167,6 +2185,12 @@ h3 {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
 
