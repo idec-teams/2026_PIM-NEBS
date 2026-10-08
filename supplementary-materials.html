@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Notebook | PIM-NEBS</title>
+    <title>Supplementary Materials | PIM-NEBS</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -39,38 +39,33 @@
     </header>
 
     <main>
-      <section class="section article-layout notebook-layout" aria-labelledby="notebook-title">
-        <aside class="article-nav notebook-week-nav" aria-label="Notebook weeks">
-          <a class="active" href="#week-1" data-page="4">Week 1</a>
-          <a href="#week-2" data-page="7">Week 2</a>
-          <a href="#week-3" data-page="10">Week 3</a>
-          <a href="#week-4" data-page="14">Week 4</a>
-          <a href="#week-5" data-page="20">Week 5</a>
-          <a href="#week-6" data-page="22">Week 6</a>
-          <a href="#week-7" data-page="24">Week 7</a>
-          <a href="#week-8" data-page="29">Week 8</a>
-          <a href="#week-9" data-page="33">Week 9</a>
-          <a href="#week-10" data-page="36">Week 10</a>
-          <a href="#week-11" data-page="39">Week 11</a>
-          <a href="#week-12" data-page="42">Week 12</a>
-          <a href="#week-13" data-page="48">Week 13</a>
-          <a href="#week-14" data-page="51">Week 14</a>
-          <a href="#week-15" data-page="57">Week 15</a>
-          <a href="#week-16" data-page="61">Week 16</a>
+      <section class="section article-layout notebook-layout document-layout" aria-labelledby="supplementary-title">
+        <aside class="article-nav notebook-week-nav document-section-nav" aria-label="Document sections">
+          <a class="active" href="#contents" data-page="1">Contents</a>
+          <a href="#s1" data-page="2">S1. PET-Film Assays</a>
+          <a href="#s2" data-page="2">S2. System Preparation</a>
+          <a href="#s3" data-page="3">S3. Docking and MD</a>
+          <a href="#s4" data-page="4">S4. PRS Sampling</a>
+          <a href="#s5" data-page="5">S5. Quantum Analysis</a>
+          <a href="#s6" data-page="6">S6. DIAS Analysis</a>
+          <a href="#s7" data-page="6">S7. Y87Q Characterization</a>
+          <a href="#s8" data-page="7">S8. S187Y Validation</a>
+          <a href="#s9" data-page="7">S9. Mechanistic Interpretation</a>
+          <a href="#references" data-page="8">Supplementary References</a>
         </aside>
 
-        <article class="article-page notebook-reader">
+        <article class="article-page notebook-reader document-pdf-reader">
           <div class="notebook-toolbar">
             <div>
-              <p class="eyebrow">2026 PIM-NEBS</p>
-              <h2 id="notebook-title">Lab notebook viewer</h2>
+              <p class="eyebrow">PIM-NEBS supplementary materials</p>
+              <h2 id="supplementary-title" class="document-title-balanced">Supplementary<br />materials viewer</h2>
             </div>
-            <div class="notebook-controls" aria-label="Notebook page controls">
+            <div class="notebook-controls" aria-label="Supplementary materials page controls">
               <button class="notebook-btn" type="button" data-action="prev">Previous</button>
               <label>
                 Page
-                <input id="notebook-page" type="number" min="1" max="64" value="1" />
-                <span>/ 64</span>
+                <input id="notebook-page" type="number" min="1" max="11" value="1" />
+                <span>/ 11</span>
               </label>
               <button class="notebook-btn" type="button" data-action="next">Next</button>
             </div>
@@ -79,14 +74,14 @@
           <div class="notebook-frame">
             <iframe
               id="notebook-pdf"
-              title="PIM-NEBS 2026 notebook PDF"
-              src="assets/notebook/2026-Notebook-formatted-16weeks.pdf#page=1&view=FitH"
+              title="Supplementary Materials PDF"
+              src="assets/documents/pim-nebs-supplementary-materials-2026.pdf#page=1&view=FitH"
             ></iframe>
           </div>
 
           <p class="notebook-fallback">
-            If the notebook viewer does not load, open the PDF directly:
-            <a href="assets/notebook/2026-Notebook-formatted-16weeks.pdf">2026 Notebook PDF</a>.
+            If the PDF viewer does not load, open the file directly:
+            <a href="assets/documents/pim-nebs-supplementary-materials-2026.pdf">PIM-NEBS Supplementary Materials PDF</a>.
           </p>
         </article>
       </section>
@@ -123,21 +118,22 @@
       </div>
     </footer>
 
+
     <script>
       (() => {
-        const totalPages = 64;
-        const pdfPath = "assets/notebook/2026-Notebook-formatted-16weeks.pdf";
+        const totalPages = Number(document.querySelector("#notebook-page").max);
+        const pdfPath = document.querySelector("#notebook-pdf").src.split("#")[0];
         const frame = document.querySelector("#notebook-pdf");
         const input = document.querySelector("#notebook-page");
-        const weekLinks = Array.from(document.querySelectorAll(".notebook-week-nav a"));
-        const weekStarts = weekLinks.map((link) => Number(link.dataset.page));
+        const sectionLinks = Array.from(document.querySelectorAll(".document-section-nav a"));
+        const sectionStarts = sectionLinks.map((link) => Number(link.dataset.page));
         const clamp = (value) => Math.min(totalPages, Math.max(1, Number(value) || 1));
-        const getActiveWeek = (page) => {
-          let activeWeek = 1;
-          weekStarts.forEach((start, index) => {
-            if (page >= start) activeWeek = index + 1;
+        const getActiveSection = (page) => {
+          let activeIndex = 0;
+          sectionStarts.forEach((start, index) => {
+            if (page >= start) activeIndex = index;
           });
-          return activeWeek;
+          return activeIndex;
         };
         const showPage = (page) => {
           const nextPage = clamp(page);
@@ -146,14 +142,14 @@
           requestAnimationFrame(() => {
             frame.src = `${pdfPath}#page=${nextPage}&view=FitH`;
           });
-          const activeWeek = getActiveWeek(nextPage);
-          weekLinks.forEach((link, index) => link.classList.toggle("active", index + 1 === activeWeek));
+          const activeIndex = getActiveSection(nextPage);
+          sectionLinks.forEach((link, index) => link.classList.toggle("active", index === activeIndex));
         };
 
         document.querySelector('[data-action="prev"]').addEventListener("click", () => showPage(Number(input.value) - 1));
         document.querySelector('[data-action="next"]').addEventListener("click", () => showPage(Number(input.value) + 1));
         input.addEventListener("change", () => showPage(input.value));
-        weekLinks.forEach((link) => {
+        sectionLinks.forEach((link) => {
           link.addEventListener("click", (event) => {
             event.preventDefault();
             showPage(link.dataset.page);
@@ -161,5 +157,6 @@
         });
       })();
     </script>
+
   </body>
 </html>
